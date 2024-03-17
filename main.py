@@ -8,9 +8,9 @@ pygame.display.set_caption("Futebol Pong")
 win = pygame.image.load("assets/win.png")
 
 score1 = 0
-score1_img = pygame.image.load("assets/score/0.png")
+score1_img = pygame.image.load("assets/score/" + str(score1) + ".png")
 score2 = 0
-score2_img = pygame.image.load("assets/score/0.png")
+score2_img = pygame.image.load("assets/score/" + str(score2) + ".png")
 
 field = pygame.image.load("assets/field.png")
 
@@ -91,20 +91,22 @@ def move_ball():
         ball_y = 337
         ball_dir_y *= -1
         ball_dir *= -1
-        score2 += 1
-        score2_img = pygame.image.load("assets/score/" + str(score2) + ".png")
+        if score2 < 9:
+            score2 += 1
+            score2_img = pygame.image.load("assets/score/" + str(score2) + ".png")
 
     elif ball_x > 1320:
         ball_x = 617
         ball_y = 337
         ball_dir_y *= -1
         ball_dir *= -1
-        score1 += 1
-        score1_img = pygame.image.load("assets/score/" + str(score1) + ".png")
+        if score1 < 9:
+            score1 += 1
+            score1_img = pygame.image.load("assets/score/" + str(score1) + ".png")
 
 
 def draw():
-    if (score1 < 8) or (score2 < 8):
+    if (score1 < 9) and (score2 < 9):
         window.blit(field, (0, 0))
         window.blit(player1, (50, player1_y))
         window.blit(player2, (1150, player2_y))
@@ -146,5 +148,3 @@ while loop:
 
     draw()
     pygame.display.update()
-
-
